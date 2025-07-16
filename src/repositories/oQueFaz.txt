@@ -1,0 +1,1 @@
+Acessa o banco de dados, somente isso

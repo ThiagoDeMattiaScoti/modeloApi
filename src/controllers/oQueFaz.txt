@@ -1,0 +1,1 @@
+Faz as requisições e chama a lógica dos services

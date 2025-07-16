@@ -1,0 +1,1 @@
+Faz a lógia de negócio, é chamado pelo controller

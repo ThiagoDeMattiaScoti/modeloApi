@@ -1,0 +1,1 @@
+o models cria um modelo, por exemplo, m uma tabela de usuarios, ele cria o modelo de usuarios
