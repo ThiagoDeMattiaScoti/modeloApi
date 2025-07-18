@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { User } from "../models/userModel";
 import { UserRepository } from "../repositories/userRepository";
 
@@ -11,5 +12,9 @@ private userRepostory = new UserRepository()
 
     createUser(data: {name: string}): void{
         this.userRepostory.createUser(data)
+    }
+
+    updateUserById(id: number, userData: Prisma.usersUpdateInput){
+        return this.userRepostory.updateUser(id, userData)
     }
 }

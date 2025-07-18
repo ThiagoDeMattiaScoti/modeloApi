@@ -6,8 +6,6 @@ const router = Router()
 
 router.get('/user', UserController.getAll)
 router.post('/user', UserController.createUser)
-
-router.get('/product', ProductController.getAll)
-router.post('/product', ProductController.createProduct)
+router.put('/user/:id', UserController.updateUser)
 
 export default router //pela nomenclatura user.routes.ts,  ele cria um userRoutes para importar no app.ts 

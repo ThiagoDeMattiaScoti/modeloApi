@@ -21,4 +21,16 @@ export class UserController {
         const user = await userServices.createUser({name})
         return res.status(200).json(user)
     }
+
+    static async updateUser(req: Request, res: Response){
+        const id: number = Number(req.params.id)
+
+        const userData: {
+            name: string
+        } = req.body
+
+        const newUser = await userServices.updateUserById(id, userData)
+
+        return res.status(200).json(newUser)
+    }
 }
