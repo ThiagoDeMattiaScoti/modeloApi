@@ -62,15 +62,28 @@ O servidor estará disponível em `http://localhost:3000`.
 ### Users
 - `GET /user`: Retorna todos os usuários.
 - `POST /user`: Cria um novo usuário.
+- `PUT /user/:id`: Atualiza um usuário existente.
+- `DELETE /user/:id`: Deleta um usuário existente.
 
 ### Products
 - `GET /product`: Retorna todos os produtos.
 - `POST /product`: Cria um novo produto.
+- `PUT /product/:id`: Atualiza um produto existente.
+- `DELETE /product/:id`: Deleta um produto existente.
 
-## Contribuição
+## Modelos do Banco de Dados
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+### User
 
-## Licença
+| Campo | Tipo   | Descrição      |
+|-------|--------|----------------|
+| id    | Int    | ID do usuário  |
+| name  | String | Nome do usuário|
 
-Este projeto está licenciado sob a licença ISC.
+### Product
+
+| Campo       | Tipo   | Descrição         |
+|-------------|--------|-------------------|
+| id          | Int    | ID do produto     |
+| description | String | Descrição do produto|
+| value       | Float  | Valor do produto  |
