@@ -23,4 +23,32 @@ model products {
   id                Int @id @default(autoincrement())
   description       String
   value             Float
+  saleItems         SaleItems[]
+  @@map("products")
+}
+
+model sales {
+  id            Int @id @default(autoincrement())
+  totalValue    Float
+  saleDate      DateTime @default(now())
+  items         SaleItems[]
+  @@map("sales")
+}  
+
+model SaleItems {
+  id            Int         @id @default(autoincrement())
+  saleId        Int
+  sale          sales       @relation(fields: [saleId], references: [id])
+
+  productId     Int
+  product       products    @relation(fields: [productId], references: [id])
+
+  quantity      Int
+  priceAtSale   Float
+  productDescription  String?
+
+  createdAt     DateTime    @default(now())
+
+  @@index([productId])
+  @@map("sale_items")
 }
