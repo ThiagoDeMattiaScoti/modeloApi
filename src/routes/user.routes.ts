@@ -8,4 +8,5 @@ router.get('/user', UserController.getAll)
 router.post('/user', UserController.createUser)
 router.put('/user/:id', UserController.updateUser)
 
+
 export default router //pela nomenclatura user.routes.ts,  ele cria um userRoutes para importar no app.ts 

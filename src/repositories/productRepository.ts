@@ -24,4 +24,12 @@ export class ProductRepostory {
             data: productData,
         });
     }
+
+    async deleteProduct(id: number){
+        return await prisma.products.delete({
+            where: {
+                id
+            }
+        })
+    }
 }

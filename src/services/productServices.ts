@@ -16,4 +16,8 @@ private productRepository = new ProductRepostory
     updateAllProducts(id: number, productData: Prisma.productsUpdateInput){
         return this.productRepository.updateProduct(id, productData)
     }
+
+    deleteProductById(id: number){
+        return this.productRepository.deleteProduct(id)
+    }
 }

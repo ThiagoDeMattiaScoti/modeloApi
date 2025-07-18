@@ -31,4 +31,11 @@ export class ProductController {
         return res.status(200).json(productData)
     }
 
+    static async deleteProduct(req: Request, res: Response){
+        const id: number = Number(req.params.id)
+
+        const deletedUser = await productServices.deleteProductById(id)
+
+        return res.status(200).json({message: 'Product excluded'})
+    }
 }
