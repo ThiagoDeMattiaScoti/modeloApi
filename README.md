@@ -9,6 +9,7 @@ Este é um modelo padrão para a criação de APIs utilizando Node.js, Express, 
 - **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
 - **Prisma**: ORM para Node.js e TypeScript.
 - **PostgreSQL**: Banco de dados relacional.
+- **bcrypt**: Biblioteca para hashing de senhas.
 
 ## Como Executar
 
@@ -71,19 +72,27 @@ O servidor estará disponível em `http://localhost:3000`.
 - `PUT /product/:id`: Atualiza um produto existente.
 - `DELETE /product/:id`: Deleta um produto existente.
 
+### Login
+- `POST /login`: Autentica um usuário.
+
 ## Modelos do Banco de Dados
 
 ### User
 
-| Campo | Tipo   | Descrição      |
-|-------|--------|----------------|
-| id    | Int    | ID do usuário  |
-| name  | String | Nome do usuário|
+| Campo    | Tipo   | Descrição        |
+|----------|--------|------------------|
+| id       | Int    | ID do usuário    |
+| name     | String | Nome do usuário  |
+| password | String | Senha do usuário |
 
 ### Product
 
-| Campo       | Tipo   | Descrição         |
-|-------------|--------|-------------------|
-| id          | Int    | ID do produto     |
+| Campo       | Tipo   | Descrição           |
+|-------------|--------|---------------------|
+| id          | Int    | ID do produto       |
 | description | String | Descrição do produto|
-| value       | Float  | Valor do produto  |
+| value       | Float  | Valor do produto    |
+
+## Segurança
+
+- **Hashing de Senhas**: As senhas dos usuários são armazenadas de forma segura utilizando o algoritmo bcrypt.
