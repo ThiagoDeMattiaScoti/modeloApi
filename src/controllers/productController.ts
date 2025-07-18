@@ -6,7 +6,12 @@ const productServices = new ProductServices
 
 export class ProductController {
     static async getAll(req: Request, res: Response){
-        const products: Product[] = await productServices.getAllProducts()
+        const {
+            search,
+            take,
+            skip
+        } = req.query
+        const products: Product[] = await productServices.getAllProducts(String(search) || '', Number(take) || 10, Number(skip) || 0)
 
         return res.status(200).json({products})
     }

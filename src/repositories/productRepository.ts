@@ -3,8 +3,17 @@ import prisma from "../config/prisma";
 import { Product } from "../models/productModel";
 
 export class ProductRepostory {
-    async getAll(): Promise<Product[]>{
-        return await prisma.products.findMany()
+    async getAll(search: string, take: number, skip: number): Promise<Product[]>{
+        return await prisma.products.findMany({
+            where: {
+                description: {
+                    contains:String(search),
+                    mode: 'insensitive'
+                }
+            },
+            take: Number(take),
+            skip: Number(skip)
+        })
     }
 
     async createProduct(data: {description: string, value: number}): Promise<Product>{

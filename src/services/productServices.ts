@@ -5,8 +5,8 @@ import { Prisma } from "@prisma/client";
 export class ProductServices {
 private productRepository = new ProductRepostory
 
-    getAllProducts(): Promise<Product[]>{
-        return this.productRepository.getAll()
+    getAllProducts(search: string, take: number, skip: number): Promise<Product[]>{
+        return this.productRepository.getAll(search, take, skip)
     }
 
     createProduct(data: {description: string, value: number}) {
