@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../config/prisma";
 import { Product } from "../models/productModel";
 
@@ -13,5 +14,14 @@ export class ProductRepostory {
                 value: data.value
             }
         })
+    }
+
+    async updateProduct(id: number, productData: Prisma.productsUpdateInput) {
+        return await prisma.products.update({
+            where: {
+                id
+            },
+            data: productData,
+        });
     }
 }

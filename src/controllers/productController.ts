@@ -19,4 +19,16 @@ export class ProductController {
         return res.status(201).json(product)
     }
 
+    static async updateProduct(req: Request, res: Response){
+        const id: number = Number(req.params.id)
+        const productData: {
+            description: string,
+            value: number 
+        } = req.body
+
+        const productUpdate = await productServices.updateAllProducts(id, productData)
+
+        return res.status(200).json(productData)
+    }
+
 }
