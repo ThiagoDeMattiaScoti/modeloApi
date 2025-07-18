@@ -17,4 +17,8 @@ private userRepostory = new UserRepository()
     updateUserById(id: number, userData: Prisma.usersUpdateInput){
         return this.userRepostory.updateUser(id, userData)
     }
+
+    deleteUserById(id: number){
+        return this.userRepostory.deleteUser(id)
+    }
 }

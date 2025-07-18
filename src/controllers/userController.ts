@@ -33,4 +33,12 @@ export class UserController {
 
         return res.status(200).json(newUser)
     }
+
+    static async deleteUser(req: Request, res: Response){
+        const id: number = Number(req.params.id)
+
+        const deletedUser = await userServices.deleteUserById(id)
+
+        return res.status(200).json({message: 'User excluded'})
+    }
 }
