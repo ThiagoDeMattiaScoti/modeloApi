@@ -2,15 +2,6 @@
 
 Este é um modelo padrão para a criação de APIs utilizando Node.js, Express, TypeScript e Prisma.
 
-## Funcionalidades
-
-- **Users**:
-  - `GET /user`: Retorna todos os usuários.
-  - `POST /user`: Cria um novo usuário.
-- **Products**:
-  - `GET /product`: Retorna todos os produtos.
-  - `POST /product`: Cria um novo produto.
-
 ## Tecnologias Utilizadas
 
 - **Node.js**: Ambiente de execução do JavaScript no servidor.
@@ -66,19 +57,20 @@ O servidor estará disponível em `http://localhost:3000`.
     └── services
 ```
 
-## Modelos do Banco de Dados
+## Endpoints da API
 
-### User
+### Users
+- `GET /user`: Retorna todos os usuários.
+- `POST /user`: Cria um novo usuário.
 
-| Campo | Tipo   | Descrição      |
-|-------|--------|----------------|
-| id    | Int    | ID do usuário  |
-| name  | String | Nome do usuário|
+### Products
+- `GET /product`: Retorna todos os produtos.
+- `POST /product`: Cria um novo produto.
 
-### Product
+## Contribuição
 
-| Campo       | Tipo   | Descrição         |
-|-------------|--------|-------------------|
-| id          | Int    | ID do produto     |
-| description | String | Descrição do produto|
-| value       | Float  | Valor do produto  |
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+
+Este projeto está licenciado sob a licença ISC.
