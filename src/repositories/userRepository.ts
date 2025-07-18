@@ -1,15 +1,21 @@
 import prisma from "../config/prisma";
+import { hashPaswword } from "../middlewares/passwordHashing";
 import { User } from "../models/userModel";
 import { Prisma } from "@prisma/client";
 
 export class UserRepository {
-    async getAll(): Promise<User[]>{ // método que retorna a tabela total
-        return await prisma.users.findMany() //Faz o prisma buscar tudo
+    async getAll(){ // método que retorna a tabela total
+        const users = await prisma.users.findMany({select: {id: true, name: true}}) //Faz o prisma buscar tudo
+        return users
     }
 
-    async createUser(data: {name: string}): Promise<void>{ // Método que cria um novo valor na tabela
+    async createUser(data: {name: string, password: string}): Promise<void>{ // Método que cria um novo valor na tabela
+        const saltRounds = 10
+        const hashedPassword = await hashPaswword(data.password, saltRounds)
+
+
         await prisma.users.create({ // Faz o prisma criar um valor na tabela
-            data:{name: data.name} //  Valores que tem que receber para o prisma criar o valor
+            data:{name: data.name, password: hashedPassword} //  Valores que tem que receber para o prisma criar o valor
         })
     }
 
@@ -36,5 +42,15 @@ export class UserRepository {
                 id // Faz o prisma validar a busca pelo ID
             }
         })
+    }
+
+    async getUserByName(name: string){
+        const user = await prisma.users.findUnique({
+            where: {
+                name
+            }
+        })
+
+        return user
     }
 }

@@ -9,5 +9,17 @@ class UserServices {
     getAllUsers() {
         return this.userRepostory.getAll();
     }
+    createUser(data) {
+        this.userRepostory.createUser(data); // Por vez, vai chamar esse médoto do repository passando os parâmetros necessários (tudo a mesma lógica abaixo)
+    }
+    updateUserById(id, userData) {
+        return this.userRepostory.updateUser(id, userData);
+    }
+    deleteUserById(id) {
+        return this.userRepostory.deleteUser(id);
+    }
+    getUserByID(id) {
+        return this.userRepostory.getUserById(id);
+    }
 }
 exports.UserServices = UserServices;

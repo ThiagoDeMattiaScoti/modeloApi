@@ -12,48 +12,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRepository = void 0;
+exports.ProductRepostory = void 0;
 const prisma_1 = __importDefault(require("../config/prisma"));
-class UserRepository {
+class ProductRepostory {
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.users.findMany(); //Faz o prisma buscar tudo
+            return yield prisma_1.default.products.findMany();
         });
     }
-    createUser(data) {
+    createProduct(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prisma_1.default.users.create({
-                data: { name: data.name } //  Valores que tem que receber para o prisma criar o valor
-            });
-        });
-    }
-    updateUser(id, userData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.users.update({
-                where: {
-                    id // Faz o prisma validar pelo ID
-                },
-                data: userData // Novos dados da row da tabela
-            });
-        });
-    }
-    deleteUser(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.users.delete({
-                where: {
-                    id // Faz o prisma validar qual row excluir pelo ID
+            return yield prisma_1.default.products.create({
+                data: {
+                    description: data.description,
+                    value: data.value
                 }
             });
         });
     }
-    getUserById(id) {
+    updateProduct(id, productData) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.users.findUnique({
+            return yield prisma_1.default.products.update({
                 where: {
-                    id // Faz o prisma validar a busca pelo ID
+                    id
+                },
+                data: productData,
+            });
+        });
+    }
+    deleteProduct(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma_1.default.products.delete({
+                where: {
+                    id
+                }
+            });
+        });
+    }
+    getProductById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma_1.default.products.findUnique({
+                where: {
+                    id
                 }
             });
         });
     }
 }
-exports.UserRepository = UserRepository;
+exports.ProductRepostory = ProductRepostory;
