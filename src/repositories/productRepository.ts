@@ -32,4 +32,12 @@ export class ProductRepostory {
             }
         })
     }
+
+    async getProductById(id: number){
+        return await prisma.products.findUnique({
+            where: {
+                id
+            }
+        })
+    }
 }

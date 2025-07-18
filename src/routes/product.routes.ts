@@ -4,6 +4,7 @@ import { ProductController } from "../controllers/productController";
 const router = Router()
 
 router.get('/product', ProductController.getAll)
+router.get('/product/:id', ProductController.getProductById)
 router.post('/product', ProductController.createProduct)
 router.put('/product/:id', ProductController.updateProduct)
 router.delete('/product/:id', ProductController.deleteProduct)

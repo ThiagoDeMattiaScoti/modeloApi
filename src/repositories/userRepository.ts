@@ -30,7 +30,7 @@ export class UserRepository {
         })
     }
 
-    async getUserById(id: number, name: string){
+    async getUserById(id: number){
         return await prisma.users.findUnique({
             where: {
                 id 

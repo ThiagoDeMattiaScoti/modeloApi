@@ -38,4 +38,13 @@ export class ProductController {
 
         return res.status(200).json({message: 'Product excluded'})
     }
+
+    static async getProductById(req: Request, res: Response){
+        const id: number= Number(req.params.id)
+
+        const product= await productServices.getProductById(id)
+
+
+        return res.status(200).json(product)
+    }
 }

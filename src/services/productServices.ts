@@ -20,4 +20,8 @@ private productRepository = new ProductRepostory
     deleteProductById(id: number){
         return this.productRepository.deleteProduct(id)
     }
+
+    getProductById(id: number){
+        return this.productRepository.getProductById(id)
+    }
 }
