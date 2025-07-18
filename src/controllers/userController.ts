@@ -41,4 +41,12 @@ export class UserController {
 
         return res.status(200).json({message: 'User excluded'})
     }
+
+    static async getuserById(req: Request, res: Response){
+        const id: number = Number(req.params.id)
+
+        const user = await userServices.getUserByID(id)
+
+        return res.status(200).json(user)
+    }
 }

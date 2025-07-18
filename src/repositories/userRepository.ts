@@ -8,7 +8,7 @@ export class UserRepository {
     }
 
     async createUser(data: {name: string}): Promise<void>{
-        await prisma.users.create({
+        await prisma.users.create({ 
             data:{name: data.name}
         })
     }
@@ -26,6 +26,14 @@ export class UserRepository {
         return await prisma.users.delete({
             where: {
                 id
+            }
+        })
+    }
+
+    async getUserById(id: number, name: string){
+        return await prisma.users.findUnique({
+            where: {
+                id 
             }
         })
     }

@@ -21,4 +21,8 @@ private userRepostory = new UserRepository()
     deleteUserById(id: number){
         return this.userRepostory.deleteUser(id)
     }
+
+    getUserByID(id: number){
+        return this.userRepostory.getUserById(id)
+    }
 }

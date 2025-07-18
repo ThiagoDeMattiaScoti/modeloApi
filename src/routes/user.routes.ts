@@ -5,6 +5,7 @@ import { ProductController } from "../controllers/productController";
 const router = Router()
 
 router.get('/user', UserController.getAll)
+router.get('/user/:id', UserController.getuserById)
 router.post('/user', UserController.createUser)
 router.put('/user/:id', UserController.updateUser)
 router.delete('/user/:id', UserController.deleteUser)
