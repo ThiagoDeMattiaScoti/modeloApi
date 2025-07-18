@@ -10,8 +10,8 @@ private userRepostory = new UserRepository()
         return this.userRepostory.getAll()
     }
 
-    createUser(data: {name: string}): void{
-        this.userRepostory.createUser(data)
+    createUser(data: {name: string}): void{ // Método que vai ser chamado quando o controller solicitar
+        this.userRepostory.createUser(data) // Por vez, vai chamar esse médoto do repository passando os parâmetros necessários (tudo a mesma lógica abaixo)
     }
 
     updateUserById(id: number, userData: Prisma.usersUpdateInput){

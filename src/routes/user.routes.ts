@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
-import { ProductController } from "../controllers/productController";
 
 const router = Router()
 
-router.get('/user', UserController.getAll)
+router.get('/user', UserController.getAll) // Cria a rota HTTP para ser chamada, assim que chamada, chama o controller (Mesma lógica abaixo)
 router.get('/user/:id', UserController.getuserById)
 router.post('/user', UserController.createUser)
 router.put('/user/:id', UserController.updateUser)
