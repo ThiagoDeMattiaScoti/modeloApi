@@ -1,28 +1,28 @@
 import { Prisma } from "@prisma/client";
-import { User } from "../models/userModel";
 import { UserRepository } from "../repositories/userRepository";
 
 
 export class UserServices {
-private userRepostory = new UserRepository()
 
-    getAllUsers(){ //método que vai ser chamado quando o controller solictar
-        return this.userRepostory.getAll()
+    constructor(private userRepository: UserRepository) {}
+
+    async getAllUsers(){ //método que vai ser chamado quando o controller solictar
+        return await this.userRepository.getAll()
     }
 
-    createUser(data: {name: string, password: string}): void{ // Método que vai ser chamado quando o controller solicitar
-        this.userRepostory.createUser(data) // Por vez, vai chamar esse médoto do repository passando os parâmetros necessários (tudo a mesma lógica abaixo)
+    async createUser(data: {name: string, password: string}){ // Método que vai ser chamado quando o controller solicitar
+        return await this.userRepository.createUser(data) // Por vez, vai chamar esse médoto do repository passando os parâmetros necessários (tudo a mesma lógica abaixo)
     }
 
-    updateUserById(id: number, userData: Prisma.usersUpdateInput){
-        return this.userRepostory.updateUser(id, userData)
+    async updateUserById(id: number, userData: Prisma.usersUpdateInput){
+        return await this.userRepository.updateUser(id, userData)
     }
 
-    deleteUserById(id: number){
-        return this.userRepostory.deleteUser(id)
+    async deleteUserById(id: number){
+        return await this.userRepository.deleteUser(id)
     }
 
-    getUserByID(id: number){
-        return this.userRepostory.getUserById(id)
+    async getUserByID(id: number){
+        return await this.userRepository.getUserById(id)
     }
 }
