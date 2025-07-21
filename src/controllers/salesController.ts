@@ -8,4 +8,12 @@ export class SalesController{
 
         return res.status(200).json(sales)
     }
+
+    static async createSale(req: Request, res: Response){
+        const {costumerId, productData} = req.body
+
+        const newSale = await salesServices.createSale(costumerId, productData)
+
+        return res.status(201).json(newSale)
+    }
 }

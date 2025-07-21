@@ -19,20 +19,30 @@ model users {
   password    String
 }
 
+model Client {
+  id          Int @id @default(autoincrement())
+  name        String @unique
+  password    String
+  sales       sales[]
+}
+
 model products {
   id                Int @id @default(autoincrement())
   description       String
   value             Float
   saleItems         SaleItems[]
-  @@map("products")
 }
 
 model sales {
-  id            Int @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
+
+  client          Client?      @relation(fields: [clientId], references: [id])
+  clientId        Int?
+
   totalValue    Float
-  saleDate      DateTime @default(now())
+  saleDate      DateTime    @default(now())
+
   items         SaleItems[]
-  @@map("sales")
 }  
 
 model SaleItems {
@@ -45,10 +55,4 @@ model SaleItems {
 
   quantity      Int
   priceAtSale   Float
-  productDescription  String?
-
-  createdAt     DateTime    @default(now())
-
-  @@index([productId])
-  @@map("sale_items")
 }
