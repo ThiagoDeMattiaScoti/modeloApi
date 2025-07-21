@@ -1,3 +1,3 @@
 import {assert} from 'poku'
 
-assert(true, 'Poku está rodando!')
+assert(true, 'Poku está rodando!');
