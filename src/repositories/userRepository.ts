@@ -23,7 +23,12 @@ export class UserRepository {
             where: {
                 id // Faz o prisma validar pelo ID
             },
-            data: userData // Novos dados da row da tabela
+            data: userData, // Novos dados da row da tabela
+            select: {
+                id: true,
+                name: true,
+                password: false
+            }
         });
     }
 

@@ -25,15 +25,14 @@ export class UserController {
 // Mesma lógica acima
 
     async updateUser(req: Request, res: Response){
-        const id: number = Number(req.params.id)
-
+        const id: number = req.userId
         const userData: {
             name: string
         } = req.body
 
         const newUser = await this.userServices.updateUserById(id, userData)
 
-        return res.status(200).json(newUser)
+        return res.status(200).json({newUser})
     }
 
     async deleteUser(req: Request, res: Response){
