@@ -60,20 +60,27 @@ O servidor estará disponível em `http://localhost:3000`.
 
 ## Endpoints da API
 
+### Login
+- `POST /login`: Autentica um usuário.
+
 ### Users
 - `GET /user`: Retorna todos os usuários.
+- `GET /user/:id`: Retorna um usuário pelo ID.
 - `POST /user`: Cria um novo usuário.
 - `PUT /user/:id`: Atualiza um usuário existente.
 - `DELETE /user/:id`: Deleta um usuário existente.
 
 ### Products
 - `GET /product`: Retorna todos os produtos.
+- `GET /product/:id`: Retorna um produto pelo ID.
 - `POST /product`: Cria um novo produto.
 - `PUT /product/:id`: Atualiza um produto existente.
 - `DELETE /product/:id`: Deleta um produto existente.
 
-### Login
-- `POST /login`: Autentica um usuário.
+### Sales
+- `GET /sales`: Retorna todas as vendas.
+- `GET /sales/:id`: Retorna uma venda pelo ID.
+- `POST /sales`: Cria uma nova venda.
 
 ## Modelos do Banco de Dados
 
