@@ -6,8 +6,8 @@ class ProductServices {
     constructor() {
         this.productRepository = new productRepository_1.ProductRepostory;
     }
-    getAllProducts() {
-        return this.productRepository.getAll();
+    getAllProducts(search, take, skip) {
+        return this.productRepository.getAll(search, take, skip);
     }
     createProduct(data) {
         this.productRepository.createProduct(data);

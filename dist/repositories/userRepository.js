@@ -14,16 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
 const prisma_1 = __importDefault(require("../config/prisma"));
+const passwordHashing_1 = require("../middlewares/passwordHashing");
 class UserRepository {
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.users.findMany(); //Faz o prisma buscar tudo
+            const users = yield prisma_1.default.users.findMany({ select: { id: true, name: true } }); //Faz o prisma buscar tudo
+            return users;
         });
     }
     createUser(data) {
         return __awaiter(this, void 0, void 0, function* () {
+            const saltRounds = 10;
+            const hashedPassword = yield (0, passwordHashing_1.hashPaswword)(data.password, saltRounds);
             yield prisma_1.default.users.create({
-                data: { name: data.name } //  Valores que tem que receber para o prisma criar o valor
+                data: { name: data.name, password: hashedPassword } //  Valores que tem que receber para o prisma criar o valor
             });
         });
     }
@@ -53,6 +57,16 @@ class UserRepository {
                     id // Faz o prisma validar a busca pelo ID
                 }
             });
+        });
+    }
+    getUserByName(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield prisma_1.default.users.findUnique({
+                where: {
+                    name
+                }
+            });
+            return user;
         });
     }
 }

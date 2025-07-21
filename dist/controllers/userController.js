@@ -24,8 +24,8 @@ class UserController {
     }
     static createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { name } = req.body; // Pega o name do body da requisição em JSON
-            const user = yield userServices.createUser({ name }); // Chama o service e passa o name como parâmetro
+            const { name, password } = req.body; // Pega o name do body da requisição em JSON
+            const user = yield userServices.createUser({ name, password }); // Chama o service e passa o name como parâmetro
             return res.status(200).json(user); // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
         });
     }

@@ -4,9 +4,10 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/typescript": "^0.4.29",
+    "jest": "^30.0.4",
     "node": "^20.19.4",
-    "poku": "^3.0.2",
     "prisma": "^6.12.0",
+    "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
@@ -16,13 +17,14 @@
   "main": "index.js",
   "dependencies": {
     "@prisma/client": "^6.12.0",
+    "@types/jest": "^30.0.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "node-bin-setup": "^1.1.4"
   },
   "scripts": {
-    "test": "npx poku",
+    "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc"
   },

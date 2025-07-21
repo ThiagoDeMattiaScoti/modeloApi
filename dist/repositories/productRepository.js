@@ -15,9 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductRepostory = void 0;
 const prisma_1 = __importDefault(require("../config/prisma"));
 class ProductRepostory {
-    getAll() {
+    getAll(search, take, skip) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma_1.default.products.findMany();
+            return yield prisma_1.default.products.findMany({
+                where: {
+                    description: {
+                        contains: String(search),
+                        mode: 'insensitive'
+                    }
+                },
+                take: Number(take),
+                skip: Number(skip)
+            });
         });
     }
     createProduct(data) {
