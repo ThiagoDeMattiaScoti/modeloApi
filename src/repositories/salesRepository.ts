@@ -55,7 +55,7 @@ export class SalesRepository {
                 data: {
                     client: costumerId? {connect: {id: costumerId}}: undefined,
                     totalValue: totalSale,
-                    items: {
+                    items: { 
                         create: saleItems
                     }
                 },

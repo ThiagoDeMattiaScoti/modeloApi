@@ -1,6 +1,5 @@
 import prisma from "../config/prisma";
 import { hashPaswword } from "../middlewares/passwordHashing";
-import { User } from "../models/userModel";
 import { Prisma } from "@prisma/client";
 
 export class UserRepository {

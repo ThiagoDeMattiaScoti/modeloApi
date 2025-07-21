@@ -6,7 +6,7 @@ interface ProductOrderItem {
 }
 
 export class SalesServices{
-    private salesRepository = new SalesRepository
+    constructor(private salesRepository: SalesRepository) {}
 
     async getAllSales(){
         return await this.salesRepository.getAllSales()

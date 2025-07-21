@@ -15,7 +15,8 @@ const productServices = new productServices_1.ProductServices;
 class ProductController {
     static getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const products = yield productServices.getAllProducts();
+            const { search, take, skip } = req.query;
+            const products = yield productServices.getAllProducts(String(search) || '', Number(take) || 10, Number(skip) || 0);
             return res.status(200).json({ products });
         });
     }
