@@ -1,7 +1,4 @@
-import { Prisma, products } from "@prisma/client";
 import prisma from "../config/prisma";
-import { saleModel } from "../models/saleModel";
-import { User } from "../models/userModel";
 
 export class SalesRepository {
     async getAllSales(){
@@ -19,7 +16,7 @@ export class SalesRepository {
 
         let totalSale = 0
         const saleItems = itemsData.map(item => { // Percorre por cada item dos que o cliente quer e retorna uma coisa (faz um saleItems = [item1, item2...])
-            const findedProduct = existentProducts.find(product => product.id === item.productId) //Verifica se os produos encontrados no BD está dentro do que o cliene quer (lógica inversa)
+            const findedProduct = existentProducts.find(product => product.id === item.productId) //Coloca o produto do existentProducts (consultado no momento) como o item no nov array
             const unitValue = findedProduct?.value || 0 //Valor unitario de cada produto
             const subtotal = unitValue * item.quantity //Subtotal do produto
             totalSale += subtotal
@@ -43,10 +40,20 @@ export class SalesRepository {
                 include: {
                     items: {
                         include: {
-                            product: true
+                            product: {
+                                select: {
+                                    description: true
+                                }
+                            }
                         }
                     },
-                    client: true
+                    client: {
+                        select: {
+                            id: true,
+                            name: true,
+                            password: false
+                        }
+                    }
                 }
             })
 
