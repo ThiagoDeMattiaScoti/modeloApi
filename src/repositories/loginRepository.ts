@@ -1,8 +1,9 @@
 import { validatePassword } from "../middlewares/passwordHashing";
 
 export class LogiRepository {
-    async login(data: {name: string, password: string}){
-        const isPasswordValid = await validatePassword(data.name, data.password)
+    async login(name: string, password: string): Promise<boolean>{
+        const isPasswordValid: boolean = await validatePassword(name, password)
+        console.log(isPasswordValid)
         return isPasswordValid
     }
 }

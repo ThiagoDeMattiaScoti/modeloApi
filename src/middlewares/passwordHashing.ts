@@ -11,16 +11,16 @@ export async function hashPaswword(password: string, salt: number): Promise<stri
     }
 }
 
-export async function validatePassword(name: string, password: string){
+export async function validatePassword(name: string, password: string): Promise<boolean>{
     const userRepository = new UserRepository
     const user = await userRepository.getUserByName(name)
-
     if (!user) return false
     if (!user.password) return false
 
     try{
         const isValid = await bcrypt.compare(password, user.password)
+        return isValid
     } catch(err){
-        return err
+        return false
     }
 }
