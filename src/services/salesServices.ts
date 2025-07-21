@@ -9,10 +9,14 @@ export class SalesServices{
     private salesRepository = new SalesRepository
 
     async getAllSales(){
-        return this.salesRepository.getAllSales()
+        return await this.salesRepository.getAllSales()
+    }
+
+    async getSaleById(id: number){
+        return await this.salesRepository.getSaleById(id)
     }
 
     async createSale(costumerId: number, products: ProductOrderItem[]){
-        return this.salesRepository.createSale(costumerId, products)
+        return await this.salesRepository.createSale(costumerId, products)
     }
 }

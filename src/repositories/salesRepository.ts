@@ -2,8 +2,30 @@ import prisma from "../config/prisma";
 
 export class SalesRepository {
     async getAllSales(){
-        const sales = await prisma.sales.findMany()
-        return sales
+        return await prisma.sales.findMany()
+    }
+
+    async getSaleById(id: number){
+        const sale = await prisma.sales.findFirst({
+            where: {
+                id
+            }
+        })
+
+        const saleItems = await prisma.saleItems.findMany({
+            where: {
+                saleId: id
+            },
+            include: {
+                product: {
+                    select: {
+                        description: true
+                    }
+                }
+            }
+        })
+
+        return {sale, saleItems}
     }
 
     async createSale(costumerId: number, itemsData: Array<{productId: number, quantity: number}>){

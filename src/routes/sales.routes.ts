@@ -4,6 +4,7 @@ import { SalesController } from "../controllers/salesController";
 const router = Router()
 
 router.get('/sales', SalesController.getAllSales)
+router.get('/sales/:id', SalesController.getSaleById)
 router.post('/sales', SalesController.createSale)
 
 export default router
