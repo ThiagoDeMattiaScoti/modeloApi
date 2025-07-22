@@ -5,7 +5,7 @@ export class UserController {
 
     constructor(private userServices: UserServices) {}
 
-   async getAll(req: Request, res: Response) { //método que faza requisição da API
+    async getAll(req: Request, res: Response) { //método que faza requisição da API
         const {
             search,
             take,
@@ -17,18 +17,17 @@ export class UserController {
         return res.status(200).json(users) //response da API
     }
 
-    async createUser(req: Request, res: Response): Promise<Response>{ // Método que faz a requisição de criar para a API
+        async createUser(req: Request, res: Response): Promise<Response>{ // Método que faz a requisição de criar para a API
         const {name, password} = req.body // Pega o name do body da requisição em JSON
 
         if (!name || !password) return res.status(400).json({message: 'É necessário informar um nome e senha'})
-
         const user = await this.userServices.createUser({name, password}) // Chama o service e passa o name como parâmetro
         return res.status(201).json(user) // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
     }
 
 // Mesma lógica acima
 
-    async updateUser(req: Request, res: Response){
+     async updateUser(req: Request, res: Response){
         const id: number = req.userId
         const userData: {
             name: string
@@ -40,7 +39,7 @@ export class UserController {
         return res.status(200).json({newUser})
     }
 
-    async deleteUser(req: Request, res: Response){
+     async deleteUser(req: Request, res: Response){
         const id: number = Number(req.params.id)
         if (!id) return res.status(400).json({message: "Sem id defnido para excluir"})
         const deletedUser = await this.userServices.deleteUserById(id)
@@ -48,11 +47,11 @@ export class UserController {
         return res.status(200).json({message: 'User excluded'})
     }
 
-    async getuserById(req: Request, res: Response){
+     async getuserById(req: Request, res: Response){
         const id: number = Number(req.params.id)
 
         const user = await this.userServices.getUserByID(id)
 
         return res.status(200).json(user)
     }
-}
+} 
