@@ -11,7 +11,7 @@ jest.mock('../../repositories/userRepository')
 
 describe('User controller', () => {
     describe('Rota HTTP GET', ()=>{
-        test('GET feito corretamente', async () =>{
+        test('Consultar usuário corretamente', async () =>{
             const req = {
                 query: {
                     search: 'a',
@@ -36,7 +36,7 @@ describe('User controller', () => {
             expect(res.json).toHaveBeenCalledWith(mockUsers)
         })
 
-        test('GET feito incorretamente', async () => {
+        test('Consultar usuário sem nada', async () => {
             const req = {
                 query: {
                     search: "",
@@ -156,7 +156,7 @@ describe('User controller', () => {
     })
 
     describe('Rota HTTP DELETE', () => {
-        test('DELETE feito corretamente', async ()=>{
+        test('Rota DELETE feita corretamente', async ()=>{
             const req = {
                 params: {
                     id: 2
@@ -179,7 +179,7 @@ describe('User controller', () => {
             expect(res.json).toHaveBeenCalledWith({message: 'User excluded'})
         })
 
-        test('DELETE feito incorretamente', async ()=>{
+        test('Rota DELETE feita incorretamente', async ()=>{
             const req = {
                 params: {
                     
