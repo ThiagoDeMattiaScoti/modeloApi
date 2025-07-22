@@ -38,9 +38,10 @@ function validatePassword(name, password) {
             return false;
         try {
             const isValid = yield bcrypt_1.default.compare(password, user.password);
+            return isValid;
         }
         catch (err) {
-            return err;
+            return false;
         }
     });
 }

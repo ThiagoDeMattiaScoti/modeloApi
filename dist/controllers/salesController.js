@@ -10,26 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SalesController = void 0;
-const salesServices_1 = require("../services/salesServices");
-const salesServices = new salesServices_1.SalesServices;
 class SalesController {
-    static getAllSales(req, res) {
+    constructor(salesServices) {
+        this.salesServices = salesServices;
+    }
+    getAllSales(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sales = yield salesServices.getAllSales();
+            const sales = yield this.salesServices.getAllSales();
             return res.status(200).json(sales);
         });
     }
-    static getSaleById(req, res) {
+    getSaleById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const sale = yield salesServices.getSaleById(Number(id));
+            const sale = yield this.salesServices.getSaleById(Number(id));
             return res.status(200).json(sale);
         });
     }
-    static createSale(req, res) {
+    createSale(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { costumerId, productData } = req.body;
-            const newSale = yield salesServices.createSale(costumerId, productData);
+            const newSale = yield this.salesServices.createSale(costumerId, productData);
             return res.status(201).json(newSale);
         });
     }

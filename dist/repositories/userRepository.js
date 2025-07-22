@@ -16,9 +16,18 @@ exports.UserRepository = void 0;
 const prisma_1 = __importDefault(require("../config/prisma"));
 const passwordHashing_1 = require("../middlewares/passwordHashing");
 class UserRepository {
-    getAll() {
+    getAll(search, take, skip) {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield prisma_1.default.users.findMany({ select: { id: true, name: true } }); //Faz o prisma buscar tudo
+            const users = yield prisma_1.default.users.findMany({
+                where: {
+                    name: {
+                        contains: String(search),
+                        mode: 'insensitive'
+                    }
+                },
+                take: Number(take),
+                skip: Number(skip)
+            }); //Faz o prisma buscar tudo
             return users;
         });
     }
@@ -37,7 +46,12 @@ class UserRepository {
                 where: {
                     id // Faz o prisma validar pelo ID
                 },
-                data: userData // Novos dados da row da tabela
+                data: userData, // Novos dados da row da tabela
+                select: {
+                    id: true,
+                    name: true,
+                    password: false
+                }
             });
         });
     }

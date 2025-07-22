@@ -10,45 +10,50 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
-const userServices_1 = require("../services/userServices");
-const userServices = new userServices_1.UserServices();
 class UserController {
-    static getAll(req, res) {
+    constructor(userServices) {
+        this.userServices = userServices;
+    }
+    getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield userServices.getAllUsers(); // Chama o service e passa os valores
-            if (!users) {
-                return res.status(400).json({ error: 'no users found' }); // Validação se  não existir usuários no banco
-            }
+            const { search, take, skip } = req.query;
+            const users = yield this.userServices.getAllUsers(String(search) || '', Number(take) || 10, Number(skip) || 0); // Chama o service e passa os valores
             return res.status(200).json(users); //response da API
         });
     }
-    static createUser(req, res) {
+    createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { name, password } = req.body; // Pega o name do body da requisição em JSON
-            const user = yield userServices.createUser({ name, password }); // Chama o service e passa o name como parâmetro
-            return res.status(200).json(user); // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
+            if (!name || !password)
+                return res.status(400).json({ message: 'É necessário informar um nome e senha' });
+            const user = yield this.userServices.createUser({ name, password }); // Chama o service e passa o name como parâmetro
+            return res.status(201).json(user); // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
         });
     }
     // Mesma lógica acima
-    static updateUser(req, res) {
+    updateUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id = Number(req.params.id);
+            const id = req.userId;
             const userData = req.body;
-            const newUser = yield userServices.updateUserById(id, userData);
-            return res.status(200).json(newUser);
+            if (!id || !userData.name)
+                return res.status(400).json({ message: "É necessário informar token e novo nome" });
+            const newUser = yield this.userServices.updateUserById(id, userData);
+            return res.status(200).json({ newUser });
         });
     }
-    static deleteUser(req, res) {
+    deleteUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.id);
-            const deletedUser = yield userServices.deleteUserById(id);
+            if (!id)
+                return res.status(400).json({ message: "Sem id defnido para excluir" });
+            const deletedUser = yield this.userServices.deleteUserById(id);
             return res.status(200).json({ message: 'User excluded' });
         });
     }
-    static getuserById(req, res) {
+    getuserById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.id);
-            const user = yield userServices.getUserByID(id);
+            const user = yield this.userServices.getUserByID(id);
             return res.status(200).json(user);
         });
     }

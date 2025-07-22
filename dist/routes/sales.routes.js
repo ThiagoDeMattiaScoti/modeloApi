@@ -2,8 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const salesController_1 = require("../controllers/salesController");
+const salesServices_1 = require("../services/salesServices");
+const salesRepository_1 = require("../repositories/salesRepository");
 const router = (0, express_1.Router)();
-router.get('/sales', salesController_1.SalesController.getAllSales);
-router.get('/sales/:id', salesController_1.SalesController.getSaleById);
-router.post('/sales', salesController_1.SalesController.createSale);
+const salesRepository = new salesRepository_1.SalesRepository;
+const salesServices = new salesServices_1.SalesServices(salesRepository);
+const salesController = new salesController_1.SalesController(salesServices);
+router.get('/sales', (req, res) => salesController.getAllSales(req, res));
+router.get('/sales/:id', (req, res) => salesController.getSaleById(req, res));
+router.post('/sales', (req, res) => salesController.createSale(req, res));
 exports.default = router;

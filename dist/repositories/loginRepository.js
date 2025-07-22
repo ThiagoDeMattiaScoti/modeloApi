@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LogiRepository = void 0;
 const passwordHashing_1 = require("../middlewares/passwordHashing");
 class LogiRepository {
-    login(data) {
+    login(name, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const isPasswordValid = yield (0, passwordHashing_1.validatePassword)(data.name, data.password);
+            const isPasswordValid = yield (0, passwordHashing_1.validatePassword)(name, password);
             return isPasswordValid;
         });
     }
