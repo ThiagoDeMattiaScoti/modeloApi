@@ -3,8 +3,18 @@ import { hashPaswword } from "../middlewares/passwordHashing";
 import { Prisma } from "@prisma/client";
 
 export class UserRepository {
-    async getAll(){ // método que retorna a tabela total
-        const users = await prisma.users.findMany({select: {id: true, name: true}}) //Faz o prisma buscar tudo
+    async getAll(search: string, take: number, skip: number){ // método que retorna a tabela total
+        const users = await prisma.users.findMany({
+            where: {
+                name:{
+                    contains: String(search),
+                    mode: 'insensitive'
+                }
+            },
+            take: Number(take),
+            skip: Number(skip)
+            
+        }) //Faz o prisma buscar tudo
         return users
     }
 

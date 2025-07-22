@@ -9,7 +9,7 @@ interface TokenPayload {
     exp: number
 }
 
-export default function authJwt(req: Request, res: Response, next: NextFunction){
+export default async function authJwt(req: Request, res: Response, next: NextFunction){
     const { authorization } = req.headers
 
     if (!authorization) return res.send(401).json({messae: 'Sem token informado'})

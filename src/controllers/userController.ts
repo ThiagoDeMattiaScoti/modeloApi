@@ -6,7 +6,13 @@ export class UserController {
     constructor(private userServices: UserServices) {}
 
    async getAll(req: Request, res: Response) { //método que faza requisição da API
-        const users = await this.userServices.getAllUsers() // Chama o service e passa os valores
+        const {
+            search,
+            take,
+            skip
+        } = req.query
+
+        const users = await this.userServices.getAllUsers(String(search) || '', Number(take) || 10, Number(skip) || 0) // Chama o service e passa os valores
 
         if (!users) {
             return res.status(400).json({error: 'no users found'}) // Validação se  não existir usuários no banco
@@ -19,7 +25,7 @@ export class UserController {
         const {name, password} = req.body // Pega o name do body da requisição em JSON
 
         const user = await this.userServices.createUser({name, password}) // Chama o service e passa o name como parâmetro
-        return res.status(200).json(user) // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
+        return res.status(201).json(user) // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
     }
 
 // Mesma lógica acima

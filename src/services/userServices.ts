@@ -6,8 +6,8 @@ export class UserServices {
 
     constructor(private userRepository: UserRepository) {}
 
-    async getAllUsers(){ //método que vai ser chamado quando o controller solictar
-        return await this.userRepository.getAll()
+    async getAllUsers(search: string, take: number, skip: number){ //método que vai ser chamado quando o controller solictar
+        return await this.userRepository.getAll(search, take, skip)
     }
 
     async createUser(data: {name: string, password: string}){ // Método que vai ser chamado quando o controller solicitar

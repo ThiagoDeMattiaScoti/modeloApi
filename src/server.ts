@@ -1,5 +1,6 @@
 import app from "./app";
 import { PORT } from "./config/env";
+import bcrypt from 'bcrypt'
 
 export const secret = 'hashing'
 
