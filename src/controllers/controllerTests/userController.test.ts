@@ -86,6 +86,7 @@ describe('User controller', () => {
             expect(res.json).toHaveBeenCalledWith(mockUser)
         })
 
+        
         test('POST feito incoretamente', async ()=>{
             const req = {
                 body: {
