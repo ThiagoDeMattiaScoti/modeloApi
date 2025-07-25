@@ -75,6 +75,7 @@ describe('User controller', () => {
                 json: jest.fn()
             } as unknown as Response
 
+            
             const mockUser = [{name: "teste unitário", password: "test"}];
             (userRepository.createUser as jest.Mock).mockResolvedValue(mockUser)
 
