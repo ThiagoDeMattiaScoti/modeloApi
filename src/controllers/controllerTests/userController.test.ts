@@ -66,7 +66,7 @@ describe('User controller', () => {
             const req = {
                 body: {
                     name: "teste unitário",
-                    password: "test"
+                    password: "Abc123*&"
                 }
             } as unknown as Request
 
@@ -82,11 +82,12 @@ describe('User controller', () => {
             await userController.createUser(req, res)
 
             expect(userRepository.createUser).toHaveBeenCalledTimes(1)
-            expect(userRepository.createUser).toHaveBeenCalledWith({"name": "teste unitário", "password": "test"})
+            expect(userRepository.createUser).toHaveBeenCalledWith({"name": "teste unitário", "password": "Abc123*&"})
             expect(res.status).toHaveBeenCalledWith(201)
             expect(res.json).toHaveBeenCalledWith(mockUser)
         })
 
+        
         test('POST feito incoretamente', async ()=>{
             const req = {
                 body: {
@@ -124,7 +125,7 @@ describe('User controller', () => {
                 json: jest.fn()
             } as unknown as Response
 
-            const mockUser = [{id: 1, name: 'tw', password: '0'}];
+            const mockUser = [{id: 1, name: 'tw', password: 'Abc123*&'}];
             (userRepository.updateUser as jest.Mock).mockResolvedValue(mockUser)
             await userController.updateUser(req, res)
 
@@ -145,7 +146,7 @@ describe('User controller', () => {
                 json: jest.fn()
             } as unknown as Response
 
-            const mockUser = [{id: 1, name: "tw", password: '0'}];
+            const mockUser = [{id: 1, name: "tw", password: 'Abc132*&'}];
             (userRepository.updateUser as jest.Mock).mockResolvedValue(mockUser)
 
             await userController.updateUser(req, res)

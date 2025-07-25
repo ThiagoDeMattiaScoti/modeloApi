@@ -19,8 +19,13 @@ export class UserController {
 
         async createUser(req: Request, res: Response): Promise<Response>{ // Método que faz a requisição de criar para a API
         const {name, password} = req.body // Pega o name do body da requisição em JSON
-
+        
         if (!name || !password) return res.status(400).json({message: 'É necessário informar um nome e senha'})
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/
+        const isPasswordValid = passwordRegex.test(password)
+        if(isPasswordValid === false){
+            return res.status(400).json({ message: `A senha precisa conter ao menos: Ao menos uma letra maiúscula; Ao menos uma letra minúscula; Pelo menos um número; Pelo menos um símbolo (!@#$%^&*()); 8 ou mais caracteres`})
+        }
         const user = await this.userServices.createUser({name, password}) // Chama o service e passa o name como parâmetro
         return res.status(201).json(user) // Envia como retorno da aplicação, o usuário que vai ser retornado quando chamar o service
     }
