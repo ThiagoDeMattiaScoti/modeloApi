@@ -123,7 +123,7 @@ describe('User controller', () => {
                 json: jest.fn()
             } as unknown as Response
 
-            const mockUser = [{id: 1, name: 'tw', password: '0'}];
+            const mockUser = [{id: 1, name: 'tw', password: 'Abc123*&'}];
             (userRepository.updateUser as jest.Mock).mockResolvedValue(mockUser)
             await userController.updateUser(req, res)
 
@@ -144,7 +144,7 @@ describe('User controller', () => {
                 json: jest.fn()
             } as unknown as Response
 
-            const mockUser = [{id: 1, name: "tw", password: '0'}];
+            const mockUser = [{id: 1, name: "tw", password: 'Abc132*&'}];
             (userRepository.updateUser as jest.Mock).mockResolvedValue(mockUser)
 
             await userController.updateUser(req, res)
