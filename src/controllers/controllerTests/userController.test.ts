@@ -80,13 +80,13 @@ describe('User controller', () => {
 
             await userController.createUser(req, res)
 
-            expect(userRepository.createUser).toHaveBeenCalledTimes(1)
+            expect(userRepository.createUser).toHaveBeenCalledTimes(1) 
             expect(userRepository.createUser).toHaveBeenCalledWith({"name": "teste unitário", "password": "Abc123*&"})
             expect(res.status).toHaveBeenCalledWith(201)
             expect(res.json).toHaveBeenCalledWith(mockUser)
         })
 
-        
+
         test('POST feito incoretamente', async ()=>{
             const req = {
                 body: {

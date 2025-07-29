@@ -3,25 +3,26 @@ import { ProductRepostory } from "../repositories/productRepository";
 import { Prisma } from "@prisma/client";
 
 export class ProductServices {
-private productRepository = new ProductRepostory
 
-    getAllProducts(search: string, take: number, skip: number): Promise<Product[]>{
-        return this.productRepository.getAll(search, take, skip)
+    constructor(private productRepository: ProductRepostory){}
+
+    async getAllProducts(search: string, take: number, skip: number): Promise<Product[]>{
+        return await this.productRepository.getAll(search, take, skip)
     }
 
-    createProduct(data: {description: string, value: number}) {
-        this.productRepository.createProduct(data)
+    async createProduct(data: {description: string, value: number}) {
+        await this.productRepository.createProduct(data)
     }
 
-    updateAllProducts(id: number, productData: Prisma.productsUpdateInput){
-        return this.productRepository.updateProduct(id, productData)
+    async updateAllProducts(id: number, productData: Prisma.productsUpdateInput){
+        return await this.productRepository.updateProduct(id, productData)
     }
 
-    deleteProductById(id: number){
-        return this.productRepository.deleteProduct(id)
+    async deleteProductById(id: number){
+        return await this.productRepository.deleteProduct(id)
     }
 
-    getProductById(id: number){
-        return this.productRepository.getProductById(id)
+    async getProductById(id: number){
+        return await this.productRepository.getProductById(id)
     }
 }
