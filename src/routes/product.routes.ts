@@ -1,12 +1,19 @@
 import { Router } from "express";
 import { ProductController } from "../controllers/productController";
+import { UserRepository } from "../repositories/userRepository";
+import { ProductRepostory } from "../repositories/productRepository";
+import { ProductServices } from "../services/productServices";
 
 const router = Router()
 
-router.get('/product', ProductController.getAll)
-router.get('/product/:id', ProductController.getProductById)
-router.post('/product', ProductController.createProduct)
-router.put('/product/:id', ProductController.updateProduct)
-router.delete('/product/:id', ProductController.deleteProduct)
+const productRepository = new ProductRepostory()
+const productServices = new ProductServices(productRepository)
+const productController = new ProductController(productServices)
+
+router.get('/product', (req, res) => productController.getAll(req, res))
+router.get('/product/:id', (req, res) => productController.getProductById(req, res))
+router.post('/product', (req, res) => productController.createProduct(req, res))
+router.put('/product/:id', (req, res) => productController.updateProduct(req, res))
+router.delete('/product/:id', (req, res) => productController.deleteProduct(req, res))
 
 export default router
